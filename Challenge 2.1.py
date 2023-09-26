@@ -7,33 +7,23 @@ class BankAccount:
     def deposit(self, amount):
         if amount > 0:
             self.__account_balance += amount
-            print(f"Deposited ${amount:.2f} into account {self.__account_number}")
+            print(f"Deposited ${amount}. New balance: ${self.__account_balance}")
         else:
-            print("Invalid deposit amount. Please deposit a positive amount.")
+            print("Invalid deposit amount. Amount must be greater than 0.")
 
     def withdraw(self, amount):
-        if amount > 0:
-            if self.__account_balance >= amount:
-                self.__account_balance -= amount
-                print(f"Withdrew ${amount:.2f} from account {self.__account_number}")
-            else:
-                print("Insufficient balance. Cannot withdraw.")
+        if amount > 0 and amount <= self.__account_balance:
+            self.__account_balance -= amount
+            print(f"Withdrew ${amount}. New balance: ${self.__account_balance}")
         else:
-            print("Invalid withdrawal amount. Please withdraw a positive amount.")
+            print("Invalid withdrawal amount or insufficient balance.")
 
     def display_balance(self):
-        print(f"Account {self.__account_number} balance: ${self.__account_balance:.2f}")
-
-# Testing the BankAccount class
+        print(f"Account Balance for {self.__account_holder_name} (Account #{self.__account_number}): ${self.__account_balance}")
 if __name__ == "__main__":
-    # Create a BankAccount instance
-    account1 = BankAccount("123456", "John Doe", 1000.0)
 
-    # Deposit money
-    account1.deposit(500.0)
-
-    # Withdraw money
-    account1.withdraw(200.0)
-
-    # Display balance
-    account1.display_balance()
+    my_account = BankAccount("123456789", "John Doe", 1000.0)
+    my_account.display_balance()  
+    my_account.deposit(500)       
+    my_account.withdraw(200)     
+    my_account.display_balance()
